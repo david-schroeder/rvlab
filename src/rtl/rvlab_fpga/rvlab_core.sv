@@ -36,8 +36,10 @@ module rvlab_core (
   tl_d2h_t tl_cpui_d2h, tl_cpud_d2h, tl_dbgsba_d2h, tl_student_host_d2h;
 
   // xbar_main devices:
-  tl_h2d_t tl_bram_main_h2d, tl_peri_h2d, tl_student_device_fast_h2d;
-  tl_d2h_t tl_bram_main_d2h, tl_peri_d2h, tl_student_device_fast_d2h;
+  tl_h2d_t tl_bram_main_h2d [1:0];
+  tl_d2h_t tl_bram_main_d2h [1:0];
+  tl_h2d_t tl_peri_h2d, tl_student_device_fast_h2d;
+  tl_d2h_t tl_peri_d2h, tl_student_device_fast_d2h;
 
   // xbar_peri devices:
   tl_h2d_t tl_dbgmem_h2d, tl_timer_h2d, tl_regdemo_h2d, tl_student_device_peri_h2d;
@@ -60,8 +62,10 @@ module rvlab_core (
     .tl_student_host_i(tl_student_host_h2d),
     .tl_student_host_o(tl_student_host_d2h),
 
-    .tl_bram_main_o          (tl_bram_main_h2d),
-    .tl_bram_main_i          (tl_bram_main_d2h),
+    .tl_bram_main_port_a_o   (tl_bram_main_h2d[0]),
+    .tl_bram_main_port_a_i   (tl_bram_main_d2h[0]),
+    .tl_bram_main_port_b_o   (tl_bram_main_h2d[1]),
+    .tl_bram_main_port_b_i   (tl_bram_main_d2h[1]),
     .tl_peri_o               (tl_peri_h2d),
     .tl_peri_i               (tl_peri_d2h),
     .tl_ddr_o,
