@@ -28,6 +28,8 @@ Original Author: Shay Gal-on
 #include <stdint.h>
 #include <inttypes.h>
 
+#include <clocking.h>
+
 #if VALIDATION_RUN
 volatile ee_s32 seed1_volatile = 0x3415;
 volatile ee_s32 seed2_volatile = 0x3415;
@@ -79,23 +81,17 @@ volatile ee_s32 seed5_volatile = 0;
 /* Clock- and timing-related utilities */
 #define VCO_MHz 1200
 
- // Synchronize with clkmgr's sysclk clock divisor
-#define CM_STATIC_SYSCLK_PRESCALER 24
-#define CM_STATIC_SYSCLK_MHZ (VCO_MHz / CM_STATIC_SYSCLK_PRESCALER)
-// ticks per second
-#define CM_STATIC_TPS ((VCO_MHz * 1000000) / CM_STATIC_SYSCLK_PRESCALER)
-
 static inline uint32_t get_sysclk_mhz() {
-    return CM_STATIC_SYSCLK_MHZ;
+    return VCO_MHz / rvlab_get_sysclock();
 }
 
 static inline uint32_t get_sysclk_khz() {
-    return (1000 * VCO_MHz) / CM_STATIC_SYSCLK_PRESCALER;
+    return (1000 * VCO_MHz) / rvlab_get_sysclock();
 }
 
 static inline uint32_t get_ticks_per_second() {
     // 1 tick = 1 cycle, i.e. return clock speed in Hz
-    return CM_STATIC_TPS;
+    return (1000000 * VCO_MHz) / rvlab_get_sysclock();
 }
 
 
@@ -209,6 +205,8 @@ portable_init(core_portable *p, int *argc, char *argv[])
     RVLAB_HEADER ee_printf("Initializing RVLab SoC for CoreMark benchmark!\n");
 
     p->portable_id = 1;
+
+    rvlab_set_sysclock(10);
     
     /* Set up Performance Counters */
 	SETUP_MHPMCOUNTER(LD_STALL);

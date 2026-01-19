@@ -30,7 +30,7 @@ Original Author: Shay Gal-on
 /* Data types and settings */
 /************************/
 
-#define ITERATIONS 1000
+#define ITERATIONS 2500
 #define STANDALONE 1
 // #define VALIDATION_RUN 1
 #define PERFORMANCE_RUN 1
