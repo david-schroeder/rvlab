@@ -56,7 +56,7 @@ module_tbs = [
     "student_rlight_tb",
     "student_tlul_mux_tb",
     "rvlab_ddr3_tb",
-    "rvlab_ddr3_topology_tb"
+    "rvlab_ddr3_tlul_tb"
 ]
 
 for name in module_tbs:

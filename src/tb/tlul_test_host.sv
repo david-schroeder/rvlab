@@ -111,7 +111,8 @@ module tlul_test_host (
 
       if (tl_i.d_valid) begin
         if (tl_i.d_opcode == tlul_pkg::AccessAckData) begin
-          $display("Debug: get word addr=0x%08x, rdata=0x%08x", i & 32'hFFFFFFC0 | tl_i.d_source, tl_i.d_data);
+          // TODO: fixme
+          $display("Debug: get word addr=0x%08x, rdata=0x%08x", (i & 32'hFFFFFFC0) | tl_i.d_source, tl_i.d_data);
         end
       end
     end
