@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SHL-2.1
 // SPDX-FileCopyrightText: 2026 RVLab Contributors
 
-module rvlab_ddr3_topology_tb;
+module rvlab_ddr3_tlul_tb;
 
   import tlul_pkg::*;
   import rvlab_ddr_pkg::*;

@@ -7,6 +7,7 @@
 #include <rvlab.h>
 
 int ddr_init(void) {
+    return 0;
     if(!(REG32(DDR_CTRL_STATUS(0)) & (1<<DDR_CTRL_STATUS_PRESENT_LSB))) {
         printf("Error: DDR not present.\n");
         return 1;

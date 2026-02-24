@@ -38,9 +38,9 @@ module rvlab_ddr_block_cache #(
 
   localparam int SETS = 2**IDX_BITS;
 
-  reg [       255:0] data_mem [SETS-1:0];
-  reg [TAG_BITS-1:0]  tag_mem [SETS-1:0];
-  logic         modified_mem [SETS-1:0];
+  (* ram_style = "block" *)       reg [       255:0]     data_mem [SETS-1:0];
+  (* ram_style = "block" *)       reg [TAG_BITS-1:0]      tag_mem [SETS-1:0];
+  (* ram_style = "distributed" *) logic              modified_mem [SETS-1:0];
 
   logic [  DDR_AW-1:0] access_addr;
   logic [IDX_BITS-1:0] access_idx, access_idx_q;

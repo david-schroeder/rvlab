@@ -97,9 +97,10 @@ module rvlab_fpga_top (
   // --------------------------
 
   logic sys_clk;
-  logic clk_200mhz;
-  logic clk_400mhz;
-  logic clk_400mhz_90deg;
+  logic clk_ddr_ref;
+  logic clk_ddr_fast;
+  logic clk_ddr_fast_90deg;
+  logic clk_ddr_ctrl;
   logic clk_100mhz_buffered;
   logic locked;
   logic ndmreset;
@@ -111,9 +112,10 @@ module rvlab_fpga_top (
     .clk_100mhz_i         (clk_100mhz_i),
     .clk_100mhz_buffered_o(clk_100mhz_buffered),
     .sys_clk_o            (sys_clk),
-    .clk_200mhz_o         (clk_200mhz),
-    .clk_400mhz_o         (clk_400mhz),
-    .clk_400mhz_90deg_o   (clk_400mhz_90deg),
+    .clk_ddr_ref_o        (clk_ddr_ref),
+    .clk_ddr_fast_o       (clk_ddr_fast),
+    .clk_ddr_fast_90deg_o (clk_ddr_fast_90deg),
+    .clk_ddr_ctrl_o       (clk_ddr_ctrl),
     .locked_o             (locked)
   );
 
@@ -154,23 +156,24 @@ module rvlab_fpga_top (
   tlul_pkg::tl_d2h_t tl_ddr_d2h, tl_ddr_ctrl_d2h;
 
   rvlab_tlul_ddr tlul_ddr_i (
-    .clk_i                (sys_clk),
-    .clk_100mhz_buffered_i(clk_100mhz_buffered),
-    .clk_200mhz_i         (clk_200mhz),
-    .clk_400mhz_i         (clk_400mhz),
-    .clk_400mhz_90deg_i   (clk_400mhz_90deg),
-    .rst_ni               (sys_rst_n),
-    .tl_i                 (tl_ddr_h2d),
-    .tl_o                 (tl_ddr_d2h),
-    .tl_ctrl_i            (tl_ddr_ctrl_h2d),
-    .tl_ctrl_o            (tl_ddr_ctrl_d2h),
+    .clk_i           (sys_clk),
+    .clk_ctrl_i      (clk_ddr_ctrl),
+    .clk_ref_i       (clk_ddr_ref),
+    .clk_fast_i      (clk_ddr_fast),
+    .clk_fast_90deg_i(clk_ddr_fast_90deg),
+
+    .rst_ni          (sys_rst_n),
+
+    .tl_i            (tl_ddr_h2d),
+    .tl_o            (tl_ddr_d2h),
+    .tl_ctrl_i       (tl_ddr_ctrl_h2d),
+    .tl_ctrl_o       (tl_ddr_ctrl_d2h),
 
     .ddr3_dq,
     .ddr3_dqs_n,
     .ddr3_dqs_p,
     .ddr3_addr,
     .ddr3_ba,
-    .ddr3_cs_n(),
     .ddr3_ras_n,
     .ddr3_cas_n,
     .ddr3_we_n,

@@ -62,7 +62,6 @@ class Sources(Block):
 
         r.tb_srcs = noddr.tb_srcs
         r.tb_srcs += [x for x in self.src_dir.glob("tb/ddr3_model/*.sv")]
-        r.tb_srcs += [x for x in self.src_dir.glob("tb/ddr3_model/*.vh")]
 
         r.xcis = noddr.xcis
 

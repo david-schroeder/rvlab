@@ -130,6 +130,70 @@ class RvlabFpgaTop(Block):
 
         return r
 
+    @task(requires={'pnr': '.pnr'})
+    def slack_analysis(self, cwd, pnr):
+            "Slack histogram to inspect timing using Vivado GUI"
+
+            NUM_CRITICAL_PATHS = 10
+            NUM_HISTOGRAM_BINS = 20
+
+            with Vivado(cwd=cwd, interact=True) as t:
+                    t.read_checkpoint(pnr.dcp)
+                    t.link_design(name=self.name)
+
+                    t.start_gui()
+
+                    # Global histogram
+                    t.create_slack_histogram(
+                        num_bins=NUM_HISTOGRAM_BINS,
+                        slack_less_than=2.5,
+                        significant_digits=3,
+                        name="project_wns_hist"
+                    )
+
+                    # Global worst paths
+                    t.report_timing(
+                        delay_type="min_max",
+                        input_pins=True,
+                        routable_nets=True,
+                        max_paths=NUM_CRITICAL_PATHS,
+                        name="project_worst_paths"
+                    )
+
+                    for clock_name in ["sys_clk", "clk_100mhz", "ddr_ctrl"]:
+
+                        clk = t.get_clocks(clock_name)
+
+                        # worst paths
+                        worst_paths = t.get_timing_paths(
+                            max_paths=NUM_CRITICAL_PATHS,
+                            delay_type="max",
+                            sort_by="slack",
+                            to=clk
+                        )
+                        if str(worst_paths) != "":
+                            print(worst_paths)
+                            # we need endpoints instead of paths
+                            worst_endpoints = t.get_property("ENDPOINT_PIN", worst_paths)
+
+                            t.report_timing(
+                                to=worst_endpoints,
+                                delay_type="max",
+                                input_pins=True,
+                                routable_nets=True,
+                                max_paths=NUM_CRITICAL_PATHS,
+                                name=clock_name + "_worst_paths"
+                            )
+
+                            # histogram
+                            t.create_slack_histogram(
+                                num_bins=NUM_HISTOGRAM_BINS,
+                                slack_less_than=2.5,
+                                significant_digits=3,
+                                name=clock_name + "_wns_hist",
+                                to=clk
+                            )
+
     @task(requires={'pnr':'.pnr'})
     def bitstream(self, cwd, pnr):
         """Generate bitstream from PNR result"""

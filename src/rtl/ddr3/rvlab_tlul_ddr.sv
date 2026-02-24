@@ -5,10 +5,10 @@ module rvlab_tlul_ddr (
   input logic clk_i,  // sys_clk
   input logic rst_ni,
 
-  input logic clk_100mhz_buffered_i,
-  input logic clk_200mhz_i,
-  input logic clk_400mhz_i,
-  input logic clk_400mhz_90deg_i,
+  input logic clk_ctrl_i,
+  input logic clk_ref_i,
+  input logic clk_fast_i,
+  input logic clk_fast_90deg_i,
 
   // TL-UL slave interface
   input  tlul_pkg::tl_h2d_t tl_i,
@@ -21,7 +21,6 @@ module rvlab_tlul_ddr (
   inout  wire [ 1:0] ddr3_dqs_p,
   output wire [14:0] ddr3_addr,
   output wire [ 2:0] ddr3_ba,
-  output wire [ 0:0] ddr3_cs_n,
   output wire        ddr3_ras_n,
   output wire        ddr3_cas_n,
   output wire        ddr3_we_n,
@@ -35,7 +34,10 @@ module rvlab_tlul_ddr (
 
   import rvlab_ddr_pkg::*;
 
-  assign tl_ctrl_o = '{d_opcode: tlul_pkg::AccessAck, default: '0};
+  tlul_short_circuit ctrl_short_i (
+    .tl_i(tl_ctrl_i),
+    .tl_o(tl_ctrl_o)
+  );
 
 `ifdef WITH_EXT_DRAM
 
@@ -66,7 +68,7 @@ module rvlab_tlul_ddr (
   /* LLC */
 
   rvlab_ddr_cache #(
-    .IDX_BITS(5)
+    .IDX_BITS(9)
   ) ddr_llc_i (
     .clk_i,
     .rst_ni,
@@ -83,7 +85,7 @@ module rvlab_tlul_ddr (
   rvlab_ddr_cdc_fifo cdc_fifo_i (
     .clk_h_i (clk_i),
     .rst_h_ni(rst_ni),
-    .clk_d_i (clk_100mhz_buffered_i),
+    .clk_d_i (clk_ctrl_i),
     .rst_d_ni(rst_ni),
 
     .wtl_h_i (llc_req),
@@ -97,7 +99,7 @@ module rvlab_tlul_ddr (
   rvlab_ddr_blkmgr #(
     .REQBUF_SIZE(BLKMGR_REQBUF_SIZE)
   ) blkmgr_i (
-    .clk_i        (clk_100mhz_buffered_i),
+    .clk_i        (clk_ctrl_i),
     .rst_ni       (rst_ni),
 
     .req_i        (blockmgr_req),
@@ -145,10 +147,10 @@ module rvlab_tlul_ddr (
     .WB_ERROR(0) // set to 1 to support Wishbone error (asserts at ECC double bit error)
   ) ddr_i (
     //clock and reset
-    .i_controller_clk(clk_100mhz_buffered_i),
-    .i_ddr3_clk(clk_400mhz_i), //i_controller_clk has period of CONTROLLER_CLK_PERIOD, i_ddr3_clk has period of DDR3_CLK_PERIOD 
-    .i_ref_clk(clk_200mhz_i), // usually set to 200 MHz 
-    .i_ddr3_clk_90(clk_400mhz_90deg_i), //90 degree phase shifted version i_ddr3_clk (required only when ODELAY_SUPPORTED is zero)
+    .i_controller_clk(clk_ctrl_i),
+    .i_ddr3_clk(clk_fast_i), //i_controller_clk has period of CONTROLLER_CLK_PERIOD, i_ddr3_clk has period of DDR3_CLK_PERIOD
+    .i_ref_clk(clk_ref_i), // usually set to 200 MHz
+    .i_ddr3_clk_90(clk_fast_90deg_i), //90 degree phase shifted version i_ddr3_clk (required only when ODELAY_SUPPORTED is zero)
     .i_rst_n(rst_ni),
     //
     // Wishbone inputs
@@ -183,7 +185,7 @@ module rvlab_tlul_ddr (
     .o_ddr3_clk_n(ddr3_ck_n),
     .o_ddr3_reset_n(ddr3_reset_n),
     .o_ddr3_cke(ddr3_cke), 
-    .o_ddr3_cs_n(ddr3_cs_n), // width = number of DDR3 ranks
+    .o_ddr3_cs_n(), // width = number of DDR3 ranks
     .o_ddr3_ras_n(ddr3_ras_n), 
     .o_ddr3_cas_n(ddr3_cas_n), 
     .o_ddr3_we_n(ddr3_we_n), 
@@ -219,6 +221,11 @@ module rvlab_tlul_ddr (
   assign ddr3_cke     = '0;
 
   assign ddr3_dm      = '0;
+
+  tlul_short_circuit ddr_short_i (
+    .tl_i,
+    .tl_o
+  );
 
 `endif
 
