@@ -1,0 +1,23 @@
+[0] CV32E40P with Xilinx MIG:
+- Software memset (memset_soft):      98321 cyc / 32768   B; 12.00 cyc/word
+- DMA memset      (memset_dma ):      56605 cyc / 32768   B;  6.91 cyc/word
+- DMA memset 2    (memset_dma ):  921259626 cyc /   512 MiB;  6.86 cyc/word
+- Full write      (test_rvlab ): 1557889332 cyc /   512 MiB; 11.61 cyc/word
+- Full read       (test_rvlab ): 2183126679 cyc /   512 MiB; 16.27 cyc/word
+
+[1] CV32E40P with UberDDR3 + Cache:
+- Software memset (memset_soft):     107035 cyc / 32768   B; 13.07 cyc/word (  -8.19% vs. [0])
+- DMA memset      (memset_dma ):      28087 cyc / 32768   B;  3.43 cyc/word (+101.46% vs. [0])
+- DMA memset 2    (memset_dma ):  459062294 cyc /   512 MiB;  3.42 cyc/word (+100.58% vs. [0])
+- Full write      (test_rvlab ): 1785984086 cyc /   512 MiB; 13.31 cyc/word ( -12.77% vs. [0])
+- Full read       (test_rvlab ): 2380565289 cyc /   512 MiB; 17.74 cyc/word (  -8.29% vs. [0])
+
+[2] CV32E40P with UberDDR3 + Cache + Prefetch Buffer:
+- Software memset (memset_soft):      98321 cyc / 32768   B; 12.00 cyc/word (  +0.00% vs. [0])
+- DMA memset      (memset_dma ):      15081 cyc / 32768   B;  1.84 cyc/word (+275.54% vs. [0])
+- DMA memset 2    (memset_dma ):  174627420 cyc /   512 MiB;  1.30 cyc/word (+427.69% vs. [0])
+- Full write      (test_rvlab ): 1547605512 cyc /   512 MiB; 11.53 cyc/word (  +0.69% vs. [0])
+- Full read       (test_rvlab ): 2166345459 cyc /   512 MiB; 16.14 cyc/word (  +0.81% vs. [0])
+
+
+(speedup = lambda old, new: 100 * (old / new - 1))
