@@ -661,11 +661,11 @@ add wave -noupdate /system_tb/board/DUT/dbg_rst_n
 add wave -noupdate /system_tb/board/DUT/sys_rst_n
 add wave -noupdate -divider {DDR LLC}
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/data_mem
-add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/modified_mem
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/tag_mem
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/dirty_rdata
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/dirty_mem
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/hit
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/modify_clear
-add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/modified_rdata
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/miss
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/fe_modify_req
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/stall_q
@@ -684,9 +684,38 @@ add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/data_rdata_
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/data_rdata
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/ancillary_q
 add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/cache_i/tag_rdata
-add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/tl_i
-add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/tl_o
-add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/cdc_fifo_i/wtl_h_o
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/tl_i
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/tl_o
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/block_rsp_i
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/ddr_llc_i/block_req_o
+add wave -noupdate -divider Prefetcher
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/valid_mask
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/SIZE
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/rst_ni
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/pending_mask
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/non_pending_mask
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/next_prefetch_addr
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/is_prefetching
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/invalid_mask
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/fe_rsp_xchg
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/fe_rsp_o
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/fe_req_xchg
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/fe_req_i
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/entry_states
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/entry_data
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/entry_addrs
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/clk_i
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/can_allocate
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/be_rsp_xchg
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/be_rsp_i
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/be_req_xchg
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/be_req_o
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/allocate_addr
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/ADRW
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/addr_match_mask
+add wave -noupdate /system_tb/board/DUT/tlul_ddr_i/prefetcher_i/addr_le_mask
+add wave -noupdate -divider CDC
+add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/cdc_fifo_i/wtl_h_o
 add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/cdc_fifo_i/wtl_h_i
 add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/cdc_fifo_i/wtl_d_o
 add wave -noupdate -expand /system_tb/board/DUT/tlul_ddr_i/cdc_fifo_i/wtl_d_i
@@ -807,7 +836,7 @@ add wave -noupdate /system_tb/board/DUT/core_i/xbar_peri_i/u_s1n_6/accept_t_rsp
 add wave -noupdate /system_tb/board/DUT/core_i/xbar_peri_i/u_s1n_6/tl_t_p
 add wave -noupdate /system_tb/board/DUT/core_i/xbar_peri_i/u_s1n_6/hfifo_reqready
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1456284708182 fs} 0}
+WaveRestoreCursors {{Cursor 1} {2101801959311 fs} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 421
 configure wave -valuecolwidth 288
@@ -823,4 +852,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {1456264586402 fs} {1456360867404 fs}
+WaveRestoreZoom {2101787980971 fs} {2101819840341 fs}

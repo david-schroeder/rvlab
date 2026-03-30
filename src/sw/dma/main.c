@@ -141,6 +141,14 @@ int main(void) {
 
     printf("memset_dma took %d cycles for %d bytes!\n", mcycle_end - mcycle_start, length_words);
 
+    length_words = DDR3_SIZE;
+
+    mcycle_start = read_csr("mcycle");
+    memset_dma((uint32_t *)DDR3_BASE_ADDR, 0xCB32E40B, length_words);
+    mcycle_end = read_csr("mcycle");
+
+    printf("memset_dma (round 2) took %d cycles for %d bytes!\n", mcycle_end - mcycle_start, length_words);
+
     /*printf("test memset_soft:\n");    
     res = test_memset(memset_soft);
     retval += res;

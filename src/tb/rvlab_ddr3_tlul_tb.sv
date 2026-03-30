@@ -142,8 +142,8 @@ module rvlab_ddr3_tlul_tb;
 
     bus.put_word(32'h10000000, 32'hbeefcafe);
 
-    bus.contiguous_write(32'h00000000, 16448);
-    bus.contiguous_read(32'h00000000, 16448);
+    bus.contiguous_write(32'h11000000, 16448);
+    bus.contiguous_read(32'h11000000, 16448);
 
     bus.get_word(32'h10000000, rdata);
     bus.get_word(32'h00000000, rdata);
