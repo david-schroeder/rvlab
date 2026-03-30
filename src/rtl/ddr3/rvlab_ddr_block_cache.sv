@@ -148,11 +148,11 @@ module rvlab_ddr_block_cache #(
   // (There is no write-first byte-wide write-enable RAM inference template
   // as of writing)
   generate
-    for (genvar i = 0; i < 32; i++) begin
+    for (genvar i = 0; i < 32; i++) begin : gen_bwwe
       assign data_rdata[8*i+:8] = data_wen_q && data_wmask_q[i]
                                 ? data_wdata_q[8*i+:8]
                                 : data_rdata_raw[8*i+:8];
-    end
+    end : gen_bwwe
   endgenerate
 
   // Tag memory
