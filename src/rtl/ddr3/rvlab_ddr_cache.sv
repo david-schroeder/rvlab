@@ -61,6 +61,7 @@ module rvlab_ddr_cache #(
       3'b101: tl_o.d_data = blk_cache_rsp.d_data[160+:32];
       3'b110: tl_o.d_data = blk_cache_rsp.d_data[192+:32];
       3'b111: tl_o.d_data = blk_cache_rsp.d_data[224+:32];
+      default: ;
     endcase
   end
 

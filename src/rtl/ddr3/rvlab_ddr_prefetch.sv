@@ -61,7 +61,7 @@ module rvlab_ddr_prefetch #(
     logic [SIZE-1:0] non_pending_mask;
 
     generate
-        for (genvar i = 0; i < SIZE; i++) begin
+        for (genvar i = 0; i < SIZE; i++) begin : gen_masks
             // Address memory is used as CAM and thus can't be inferred as RAM resources
             assign addr_match_mask[i]  = entry_addrs[i] == fe_req_i.a_address;
             assign addr_le_mask[i]     = entry_addrs[i] <= fe_req_i.a_address;
@@ -69,7 +69,7 @@ module rvlab_ddr_prefetch #(
             assign pending_mask[i]     = addr_match_mask[i] && entry_states[i] == Pending;
             assign non_pending_mask[i] = entry_states[i] != Pending;
             assign invalid_mask[i]     = entry_states[i] == Invalid;
-        end
+        end : gen_masks
     endgenerate
 
     logic [ADRW-1:0] allocate_addr;
