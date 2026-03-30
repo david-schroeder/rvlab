@@ -6,6 +6,8 @@
 RISC-V Lab Docs
 ===============
 
+Welcome to the RISC-V Lab documentation.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

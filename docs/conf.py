@@ -11,8 +11,8 @@ sys.path.insert(0, os.path.abspath("../"))
 # -- Project information -----------------------------------------------------
 
 project = 'RISC-V Lab'
-copyright = ''
-author = 'Mixed Signal Circuit Design'
+copyright = 'RVLab Contributors'
+author = 'RVLab Contributors'
 
 # -- General configuration ---------------------------------------------------
 
