@@ -19,7 +19,7 @@ class RvlabFpgaTop(Block):
         self.src_dir = self.flow.base_dir / "src"
         self.design_dir = self.src_dir / "design"
         self.xdc_in = [
-            self.design_dir / "xdc" / f"{self.name}.xdc",
+            self.design_dir / "xdc" / "rvlab_fpga_top.xdc",
             self.design_dir / "xdc" / "rvlab_ddr.xdc"
         ]
 

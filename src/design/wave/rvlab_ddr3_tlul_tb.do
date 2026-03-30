@@ -4,6 +4,31 @@ add wave -noupdate -divider {Clocks and Resets}
 add wave -noupdate /rvlab_ddr3_tlul_tb/clk100
 add wave -noupdate /rvlab_ddr3_tlul_tb/sysclk
 add wave -noupdate /rvlab_ddr3_tlul_tb/rstn
+add wave -noupdate -divider {Prefetch Buffer}
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/valid_mask
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/SIZE
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/rst_ni
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/pending_mask
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/non_pending_mask
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/fe_rsp_o
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/fe_req_i
+add wave -noupdate -expand /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/entry_states
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/entry_data
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/entry_addrs
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/clk_i
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/can_allocate
+add wave -noupdate -expand /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/be_rsp_i
+add wave -noupdate -expand /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/be_req_o
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/allocate_addr
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/ADRW
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/addr_match_mask
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/addr_le_mask
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/next_prefetch_addr
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/is_prefetching
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/fe_rsp_xchg
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/fe_req_xchg
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/be_rsp_xchg
+add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/prefetcher_i/be_req_xchg
 add wave -noupdate -divider TL-UL
 add wave -noupdate -expand /rvlab_ddr3_tlul_tb/tl_host_h2d
 add wave -noupdate -expand /rvlab_ddr3_tlul_tb/tl_host_d2h
@@ -53,7 +78,6 @@ add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/data_rdata
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/data_mem
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/clk_i
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/modify_clear
-add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/modified_mem
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/be_rsp_i
 add wave -noupdate -expand /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/be_req_o
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_llc_i/cache_i/ancillary_q
@@ -146,7 +170,7 @@ add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_i/i_ddr3_clk
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_i/i_controller_clk
 add wave -noupdate /rvlab_ddr3_tlul_tb/DUT/ddr_i/i_aux
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {212437928908 fs} 0}
+WaveRestoreCursors {{Cursor 1} {15871108010 fs} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 301
 configure wave -valuecolwidth 181
@@ -162,4 +186,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {212381735820 fs} {213264119168 fs}
+WaveRestoreZoom {15852138023 fs} {15916403694 fs}

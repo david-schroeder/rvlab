@@ -80,7 +80,7 @@ module rvlab_tlul_ddr (
 
 `ifdef WITH_EXT_DRAM
 
-  localparam int BLKMGR_REQBUF_SIZE = 16;
+  localparam int BLKMGR_REQBUF_SIZE = 16; // Minimum 16 to reach max. DDR3 bandwidth
   localparam int BLKMGR_REQBUF_IDXW = $clog2(BLKMGR_REQBUF_SIZE);
   localparam int AUXW = BLKMGR_REQBUF_IDXW + DDR_ANCW;
 
@@ -121,8 +121,8 @@ module rvlab_tlul_ddr (
 
   /* LLC */
 
-  ddr3_h2d_t blockmgr_req, llc_req;
-  ddr3_d2h_t blockmgr_rsp, llc_rsp;
+  ddr3_h2d_t blockmgr_req, llc_req, prefetch_req;
+  ddr3_d2h_t blockmgr_rsp, llc_rsp, prefetch_rsp;
 
   rvlab_ddr_cache #(
     .IDX_BITS(9)
@@ -137,6 +137,17 @@ module rvlab_tlul_ddr (
     .block_rsp_i(llc_rsp)
   );
 
+  rvlab_ddr_prefetch prefetcher_i (
+    .clk_i,
+    .rst_ni,
+
+    .fe_req_i(llc_req),
+    .fe_rsp_o(llc_rsp),
+
+    .be_req_o(prefetch_req),
+    .be_rsp_i(prefetch_rsp)
+  );
+
   /* CDC FIFO */
 
   rvlab_ddr_cdc_fifo cdc_fifo_i (
@@ -145,8 +156,8 @@ module rvlab_tlul_ddr (
     .clk_d_i (clk_ctrl),
     .rst_d_ni(ddr_rstn),
 
-    .wtl_h_i (llc_req),
-    .wtl_h_o (llc_rsp),
+    .wtl_h_i (prefetch_req),
+    .wtl_h_o (prefetch_rsp),
     .wtl_d_o (blockmgr_req),
     .wtl_d_i (blockmgr_rsp)
   );
@@ -203,7 +214,8 @@ module rvlab_tlul_ddr (
     .ODELAY_SUPPORTED(0), //set to 1 if ODELAYE2 is supported
     .SECOND_WISHBONE(0), //set to 1 if 2nd wishbone for debugging is needed 
     .ECC_ENABLE(0), // set to 1 or 2 to add ECC (1 = Side-band ECC per burst, 2 = Side-band ECC per 8 bursts , 3 = Inline ECC ) 
-    .WB_ERROR(0) // set to 1 to support Wishbone error (asserts at ECC double bit error)
+    .WB_ERROR(0), // set to 1 to support Wishbone error (asserts at ECC double bit error)
+    .BIST_MODE(0) // skip initial test for faster startup
   ) ddr_i (
     //clock and reset
     .i_controller_clk(clk_ctrl),
