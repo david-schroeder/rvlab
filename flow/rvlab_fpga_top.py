@@ -20,7 +20,8 @@ class RvlabFpgaTop(Block):
         self.design_dir = self.src_dir / "design"
         self.xdc_in = [
             self.design_dir / "xdc" / "rvlab_fpga_top.xdc",
-            self.design_dir / "xdc" / "rvlab_ddr.xdc"
+            self.design_dir / "xdc" / "rvlab_ddr.xdc",
+            self.design_dir / "xdc" / "floorplan.xdc"
         ]
 
     @task(requires={'srcs':'srcs.srcs'}, hidden=True)
