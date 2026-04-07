@@ -4,7 +4,6 @@
 from pydesignflow import Flow
 
 from .rvlab_fpga_top import RvlabFpgaTop
-from .rvlab_mig import RvlabMig
 from .system_tb import SystemTb
 from .xbar import XbarGenerator
 from .sw import Program, Libsys
@@ -12,6 +11,7 @@ from .simlibs_questa import SimlibsQuesta
 from .module_tb import ModuleTb
 from .sources import Sources
 from .reggen import RegisterGenerator
+from .ddr3_model import Ddr3Model
 
 flow = Flow()
 
@@ -41,14 +41,14 @@ for sw_dir in sw_dirs:
 flow['xbar'] = XbarGenerator()
 flow['reggen'] = RegisterGenerator()
 flow['simlibs_questa'] = SimlibsQuesta()
+flow['ddr3_model'] = Ddr3Model()
 flow['srcs'] = Sources(dependency_map={
     'xbar': 'xbar',
     'reggen': 'reggen',
     'swinit': 'sw_test_rvlab',
-    'mig':'rvlab_mig',
+    'ddr3_model': 'ddr3_model',
 })
 
-flow['rvlab_mig'] = RvlabMig()
 flow['rvlab_fpga_top'] = RvlabFpgaTop(dependency_map={'srcs':'srcs'})
 
 
@@ -57,7 +57,7 @@ flow['rvlab_fpga_top'] = RvlabFpgaTop(dependency_map={'srcs':'srcs'})
 
 module_tbs = [
     "student_rlight_tb",
-    "student_tlul_mux_tb",
+    "student_tlul_mux_tb"
 ]
 
 for name in module_tbs:
