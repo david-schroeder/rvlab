@@ -37,7 +37,7 @@ Install open-source components
 Make sure you have a recent Python version (3.10+?) installed.
 
 Install pip and libraries required by Vivado as Debian / Ubuntu packages::
-    
+
     sudo apt-get install python3-pip libtinfo6 libtinfo5 libtinfo-dev
 
 Install Python dependencies, including PyDesignFlow_  and NoTcl_, using pip (likely, this needs to be done in the context of a `Python virtual environment <https://docs.python.org/3/library/venv.html>`_)::
@@ -95,8 +95,8 @@ Intel offers `Questa-Intel`_ Starter FPGA edition, a free version of the QuestaS
 
     # Execute in every new shell before starting the flow.
     # Adapt the paths for your installation.
-    export LM_LICENSE_FILE=~/bin/intelFPGA_pro/LR-113703_License.dat
-    export PATH=~/bin/intelFPGA_pro/22.4/questa_fse/bin:$PATH
+    export SALT_LICENSE_SERVER=~/bin/intelFPGA_pro/LR-113703_License.dat
+    export PATH=~/bin/intelFPGA_pro/25.1/questa_fse/bin:$PATH
 
 Its main limitation seems to be a limit of 5000 module instances during simulation. This seems to be more than sufficient for rvlab RTL simulation, which presently uses around 195 instances. Netlist simulation is (probably?) not possible due to the limitation. The following TCL command in QuestaSim supposedly counts the number of module instances during simulation::
 
@@ -118,10 +118,10 @@ Content of ~/bin/rvlab.sh combining all previous shell scripts of this page:
 
 .. code-block:: bash
 
-    export LM_LICENSE_FILE=~/bin/intelFPGA_pro/LR-231294_License.dat
+    export SALT_LICENSE_SERVER=~/bin/intelFPGA_pro/LR-231294_License.dat
     ~/bin/Xilinx/Vivado/2022.2/settings64.sh
     export XILINX_VIVADO=~/bin/Xilinx/Vivado/2022.2
-    export PATH=~/.local/bin:~/bin/intelFPGA_pro/22.4/questa_fse/bin:~/bin/riscv/bin:~/bin/Xilinx/Vivado/2022.2/bin:~/bin/verible/bin:$PATH
+    export PATH=~/.local/bin:~/bin/intelFPGA_pro/25.1/questa_fse/bin:~/bin/riscv/bin:~/bin/Xilinx/Vivado/2022.2/bin:~/bin/verible/bin:$PATH
 
 In a new shell execute::
 

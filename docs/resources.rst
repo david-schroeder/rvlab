@@ -23,12 +23,11 @@ RISC-V System
 - `RISC-V Reference card <https://github.com/jameslzhu/riscv-card>`_
 - `RISC-V Instruction Set Manual Vol. I: Unprivileged ISA <https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMAFDQC/riscv-spec-20191213.pdf>`_
 - `RISC-V Instruction Set Manual Vol. II: Privileged ISA <https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pdf>`_
-- `TileLink Spec <https://starfivetech.com/uploads/tilelink_spec_1.8.1.pdf>`_
-
+- `TileLink Spec <https://www.sifive.com/document-file/tilelink-spec-1.9.3>`_
 - OpenTitan's `Reggen manual <https://opentitan.org/book/util/reggen/index.html>`_ (differs in details from the version used in rvlab!)
 - OpenTitan's `Crossbar Generation tool manual <https://opentitan.org/book/util/tlgen/index.html>`_ (differs in details from the version used in rvlab!)
 
-- `Ibex Documentation <https://ibex-core.readthedocs.io/en/latest/index.html>`_
+- `CV32E40P Documentation <https://docs.openhwgroup.org/projects/cv32e40p-user-manual/en/cv32e40p_v1.8.3>`_
 
 SystemVerilog
 -------------
