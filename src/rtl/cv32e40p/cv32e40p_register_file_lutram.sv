@@ -3,7 +3,6 @@
 
 /*
 	LUTRAM-Based Register File for the RISC-V Lab CV32E40P.
-	Does not support FPU or ZFINX.
 */
 
 module cv32e40p_register_file #(
@@ -52,12 +51,16 @@ module cv32e40p_register_file #(
 		Reset is unconnected; crt0 should initialize register values.
 	*/
 
-	localparam int NUM_REGS = 2**5;
+	// number of integer registers
+	localparam NUM_WORDS = 2 ** (ADDR_WIDTH - 1);
+	// number of floating point registers
+	localparam NUM_FP_WORDS = 2 ** (ADDR_WIDTH - 1);
+	localparam NUM_TOT_WORDS = FPU ? (ZFINX ? NUM_WORDS : NUM_WORDS + NUM_FP_WORDS) : NUM_WORDS;
 
-	(* ram_style = "distributed" *) reg [DATA_WIDTH-1:0] bank_a [NUM_REGS-1:0];
-	(* ram_style = "distributed" *) reg [DATA_WIDTH-1:0] bank_b [NUM_REGS-1:0];
+	(* ram_style = "distributed" *) reg [DATA_WIDTH-1:0] bank_a [NUM_TOT_WORDS-1:0] = '{default: '0};
+	(* ram_style = "distributed" *) reg [DATA_WIDTH-1:0] bank_b [NUM_TOT_WORDS-1:0] = '{default: '0};
 
-	reg lvt_mem [NUM_REGS-1:0]; // Bit set = bank b, else bank a is more live
+	reg lvt_mem [NUM_TOT_WORDS-1:0]; // Bit set = bank b, else bank a is more live
 
 	// Read ports
 	wire [DATA_WIDTH-1:0] read_a1, read_a2, read_a3; // a = bank, 1/2/3 = read port# respectively
@@ -94,7 +97,7 @@ module cv32e40p_register_file #(
 
 	// LVT updating
 	generate
-		for (genvar i = 1; i < NUM_REGS; i++) begin
+		for (genvar i = 1; i < NUM_TOT_WORDS; i++) begin
 			always_ff @(posedge clk or negedge rst_n) begin
 				if(~rst_n) begin
 					lvt_mem[i] <= '0;
@@ -107,11 +110,12 @@ module cv32e40p_register_file #(
 		assign lvt_mem[0] = '0;
 	endgenerate
 
-	initial begin
-		for (int i = 0; i < NUM_REGS; i++) begin
-			bank_a[i] <= '0;
-			bank_b[i] <= '0;
+	// Virtual memory for testbenches
+	logic [DATA_WIDTH-1:0] virt_regs [NUM_TOT_WORDS-1:0];
+	generate
+		for (genvar vidx = 0; vidx < NUM_TOT_WORDS; vidx++) begin
+			assign virt_regs[vidx] = lvt_mem[vidx] ? bank_b[vidx] : bank_a[vidx];
 		end
-	end
+	endgenerate
 
 endmodule
