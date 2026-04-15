@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="-162.63456"
-     inkscape:cy="477.80215"
+     inkscape:zoom="1.4"
+     inkscape:cx="297.5"
+     inkscape:cy="358.92857"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -101,7 +101,7 @@
     <path
        id="rect1771-8"
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.49029;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 57.5,21.25 V 52.5 H 35 V 45 H 20 V 21.25 Z"
+       d="M 57.5,21.25 57.5,45 H 35 35 20 V 21.25 Z"
        sodipodi:nodetypes="ccccccc" />
     <rect
        style="opacity:1;fill:#ff9955;fill-opacity:0.5;stroke-width:0.438874;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
@@ -709,10 +709,6 @@
        d="M 76.25,86.249999 V 92.5"
        id="path2011"
        sodipodi:nodetypes="cc" />
-    <path
-       style="font-variation-settings:normal;opacity:0.999;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
-       d="m 40,45 2.5,5 2.5,-5 z"
-       id="path1103-9" />
     <circle
        style="opacity:1;fill:#000000;fill-opacity:0.927487;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
        id="path2030"
@@ -742,17 +738,6 @@
        id="circle2038"
        cx="27.507267"
        cy="31.245726"
-       r="0.89999998" />
-    <path
-       id="path2007-7-9-2"
-       style="font-variation-settings:normal;opacity:0.999;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000"
-       d="m 37.5,47.5 h 3.75"
-       sodipodi:nodetypes="cc" />
-    <circle
-       style="fill:#000000;fill-opacity:0.927487;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
-       id="circle2038-6-2-2"
-       cx="37.515339"
-       cy="47.510677"
        r="0.89999998" />
     <circle
        style="opacity:1;fill:#000000;fill-opacity:0.927487;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
@@ -874,16 +859,16 @@
     <text
        xml:space="preserve"
        style="font-size:3.52778px;line-height:1;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.5;stroke-dasharray:none"
-       x="28.75"
+       x="31.25"
        y="51.25"
        id="text2151"><tspan
          sodipodi:role="line"
-         x="28.75"
+         x="31.25"
          y="51.25"
          style="font-size:3.52778px;stroke-width:0.5;stroke-dasharray:none"
          id="tspan2149">locked</tspan><tspan
          sodipodi:role="line"
-         x="28.75"
+         x="31.25"
          y="54.777779"
          style="font-size:3.52778px;stroke-width:0.5;stroke-dasharray:none"
          id="tspan2153" /></text>
