@@ -94,16 +94,16 @@ volatile ee_s32 seed5_volatile = 0;
 #define VCO_MHZ 1200
 
 static inline uint32_t get_sysclk_mhz() {
-    return VCO_MHz / rvlab_get_sysclock();
+    return VCO_MHZ / rvlab_get_sysclock();
 }
 
 static inline uint32_t get_sysclk_khz() {
-    return (1000 * VCO_MHz) / rvlab_get_sysclock();
+    return (1000 * VCO_MHZ) / rvlab_get_sysclock();
 }
 
 static inline uint32_t get_ticks_per_second() {
     // 1 tick = 1 cycle, i.e. return clock speed in Hz
-    return (1000000 * VCO_MHz) / rvlab_get_sysclock();
+    return (1000000 * VCO_MHZ) / rvlab_get_sysclock();
 }
 
 
