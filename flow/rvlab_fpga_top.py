@@ -146,6 +146,9 @@ class RvlabFpgaTop(Block):
 
                     t.start_gui()
 
+                    # GUI Configuration from TCL script
+                    t.source(self.design_dir / "vivado_gui.tcl")
+
                     # Global histogram
                     t.create_slack_histogram(
                         num_bins=NUM_HISTOGRAM_BINS,
