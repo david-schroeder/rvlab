@@ -31,7 +31,7 @@ Modified by RVLab Contributors.
 /* Data types and settings */
 /************************/
 
-#define ITERATIONS 2500
+#define ITERATIONS 5000
 #define STANDALONE 1
 // #define VALIDATION_RUN 1
 #define PERFORMANCE_RUN 1
@@ -82,7 +82,7 @@ Modified by RVLab Contributors.
 #endif
 #ifndef COMPILER_FLAGS
 #define COMPILER_FLAGS \
-    "-Wall -ffreestanding -fno-builtin --specs=nosys.specs -nostdlib -g -Wl,-lgcc,--whole-archive -Os -mabi=ilp32 march=rv32imc"
+    "-Wall -ffreestanding -fno-builtin --specs=nosys.specs -nostdlib -g -Wl,-lgcc,--whole-archive -Ofast -mabi=ilp32 -march=rv32imc"
 #endif
 #ifndef MEM_LOCATION
 #define MEM_LOCATION "STACK"

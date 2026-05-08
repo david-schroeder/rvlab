@@ -36,7 +36,7 @@ def get_cflags(abi, arch, funciton_sections=True):
         #"-msave-restore",
         #"-Wl,-gc-sections",
         "-Wl,-lgcc,--whole-archive",
-        "-Os",
+        "-Ofast",
         f"-mabi={abi}",
         f"-march={arch}",
     ]

@@ -102,8 +102,6 @@ _start:
 _exit:
 
     csrc mstatus, 0x8 // global interrupt disable
-
-_exit:
     lui  t0,     %hi(hostio + 0x800)
     addi t0, t0, %lo(hostio + 0x800)
     sw a0, 4(t0) // _hostid_start.retval = return value of main
