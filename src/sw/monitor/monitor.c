@@ -204,6 +204,7 @@ void cmd_get_cpi(char *args[]) {
     printf("minstret : 0x%08x_%08x\n", (uint32_t)instret_h, (uint32_t)instret_l);
 }
 
+void _exit(int);
 
 void cmd_quit(char *args[]) {
     _exit(0);

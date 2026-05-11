@@ -109,7 +109,9 @@ module rvlab_fpga_top (
   tl_h2d_t tl_clk_reconf_h2d;
   tl_d2h_t tl_clk_reconf_d2h;
 
-  rvlab_clkmgr clkmgr_i (
+  rvlab_clkmgr #(
+    .SYS_CLK_DIV_DEFAULT(16)
+  ) clkmgr_i (
     .clk_100mhz_i         (clk_100mhz_i),
     .clk_100mhz_buffered_o(clk_100mhz_buffered),
     .sys_clk_o            (sys_clk),

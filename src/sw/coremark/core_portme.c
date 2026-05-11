@@ -218,7 +218,7 @@ portable_init(core_portable *p, int *argc, char *argv[])
 
     p->portable_id = 1;
 
-    rvlab_set_sysclock(9);
+    rvlab_set_sysclock(8);
     
     /* Set up Performance Counters */
 	SETUP_MHPMCOUNTER(LD_STALL);

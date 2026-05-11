@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <rvlab.h>
+#include <clocking.h>
 
 #include "ddr_memtest.h"
 #include "regdemo.h"
@@ -49,7 +50,7 @@ int main(void) {
 
     bool ddr_available = !ddr_init();
 
-    rvlab_set_sysclock(10);
+    rvlab_set_sysclock(9);
 
     test_report(&s, "regdemo_test", regdemo_test());
     test_report(&s, "rv_timer_test", rv_timer_test());

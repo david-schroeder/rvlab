@@ -10,11 +10,14 @@ from .elf2mem import elf2mem
 command = 'ls'
 shutil.which(command) is not None
 
-cfg_arch = "rv32imc_zicsr"
+arch_pulp_ext = "_xcvhwlp_xcvbitmanip_xcvalu_xcvbi_xcvmac_xcvmem_xcvsimd"
+use_pulp = False
+cfg_arch = "rv32imc_zicsr_zifencei_zihpm_zicntr" + (arch_pulp_ext if use_pulp else "")
 cfg_abi  = "ilp32"
 
 def find_toolchain_prefix():
     prefixes_with_ziczr_compat = [
+        ("riscv32-corev-elf-", True),
         ("riscv-none-elf-", True),
         ("riscv32-unknown-elf-", True),
         ("riscv-none-embed-", False),
