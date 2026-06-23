@@ -1,11 +1,5 @@
-// Copyright lowRISC contributors.
-// SPDX-FileCopyrightText: 2024-2026 RVLab Contributors
-// Licensed under the Apache License, Version 2.0, see LICENSE for details.
-// SPDX-License-Identifier: Apache-2.0
-//
-// Modified by RVLab Contributors.
-//
-// Common Library: Clock Gating cell
+// SPDX-FileCopyrightText: 2026 RVLab contributors
+// SPDX-License-Identifier: SHL-2.1
 
 module prim_clock_gating (
   input  logic clk_i,
@@ -14,15 +8,12 @@ module prim_clock_gating (
   output logic clk_o
 );
 
-  logic enable_clock;
-  assign enable_clock = en_i | test_en_i;
-    
   BUFGCE #(
     .SIM_DEVICE("7SERIES")
   ) clkbuf_i (
-    .O (clk_o),
-    .CE(enable_clock),  // according to doc, this seems to be a glitch-free (latch based) clock gate
-    .I (clk_i)
+    .I (clk_i),
+    .CE(en_i | test_en_i),
+    .O (clk_o)
   );
 
 endmodule
