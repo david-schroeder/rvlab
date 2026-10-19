@@ -154,6 +154,8 @@ trap_entry:
     la t0, _exit
     csrrw t0, mepc, t0
 
+    // automatically fall through to return_from_trap
+
 return_from_trap:
     // restore registers from irq stack
     //  x0 == zero

@@ -53,6 +53,12 @@ int trap_handler_default() {
 	return -1;
 }
 
+// Traps (Load faults) are also the detection mechanism for DDR availability, so
+// the DDR availability checking logic lives in this file:
+
+static volatile bool ddr_present = 1;
+static volatile bool is_checking_ddr_availability = 0;
+
 ///////////////////////////////
 //                           //
 // OVERRIDABLE TRAP HANDLERS //
@@ -66,7 +72,6 @@ int __attribute__((weak)) illegal_insn_handler(void) { return trap_handler_defau
 
 int __attribute__((weak)) breakpoint_handler(void) { return trap_handler_default(); }
 
-// load_fault_handler is overridden by DDR3 availability check
 int __attribute__((weak)) load_fault_handler(void) { return trap_handler_default(); }
 
 int __attribute__((weak)) store_fault_handler(void) { return trap_handler_default(); }
@@ -95,6 +100,32 @@ int rvlab_trap(void) {
 		return irq_error_handler();
 	}
 
+	if (is_checking_ddr_availability) {
+		// we only reach here if the DDR3_BASE_ADDR dereference in
+		// `ddr_available` causes a bus error / load fault, i.e.
+		// the ddr is not present / available
+		ddr_present = 0;
+
+		// The `mret` executed at the end of this handler will return to the
+		// instruction at address `mepc`, so advance mepc *past* the
+		// excepting load instruction (which may fail silently -- failure
+		// is the DDR (non-)availability detection mechanism) by adding the
+		// length of the excepting instruction to it
+
+		uint32_t mepc = read_csr("mepc");
+		uint16_t insn_halfword = *(uint16_t*)mepc;
+
+		// Decode whether the excepting load instruction was compressed
+		// (lowest two instruction word bits = 0b11) -> derive its length
+		if ((insn_halfword & 0x3) == 0x3) {
+			write_csr("mepc", mepc + 4);
+		} else {
+			write_csr("mepc", mepc + 2);
+		}
+
+		return 0;
+	}
+
 	// Exception
 	switch (masked_mcause) {
 		case EXC_CAUSE_INSTR_FAULT : return instr_fault_handler();
@@ -108,4 +139,15 @@ int rvlab_trap(void) {
 	}
 
 	return -3;
+}
+
+bool ddr_available() {
+	is_checking_ddr_availability = 1;
+
+	asm volatile ("" ::: "memory");	// Prevent compiler memory access reordering
+	*((volatile uint32_t *)DDR3_BASE_ADDR);
+	asm volatile ("" ::: "memory");
+
+	is_checking_ddr_availability = 0;
+	return ddr_present;
 }
