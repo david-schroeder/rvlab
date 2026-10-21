@@ -496,7 +496,7 @@ module cv32e40p_load_store_unit #(
 
 `ifdef CV32E40P_ASSERT_ON
 
-  // External data bus errors are not supported yet. PMP errors are not supported yet.
+  // PMP errors are not supported yet. (External bus errors are supported.)
   // 
   // Note: Once PMP is re-introduced please consider to make data_err_pmp_i a 'data' signal
   // that is qualified with data_req_o && data_gnt_i (instead of suppressing data_gnt_i 
@@ -506,7 +506,7 @@ module cv32e40p_load_store_unit #(
   // NO LONGER FEEDS INTO LSU_READY_EX_O.
 
   property p_no_error;
-    @(posedge clk) (1'b1) |-> ((data_err_i == 1'b0) && (data_err_pmp_i == 1'b0));
+    @(posedge clk) (1'b1) |-> (data_err_pmp_i == 1'b0);
   endproperty
 
   a_no_error :

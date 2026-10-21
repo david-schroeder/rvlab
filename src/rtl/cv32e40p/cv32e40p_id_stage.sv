@@ -189,6 +189,7 @@ module cv32e40p_id_stage
     output logic       data_load_event_ex_o,
 
     input  logic data_we_wb_i,
+    input  logic lsu_busy_i,  // load/store in EX or outstanding in WB
 
     output logic data_misaligned_ex_o,
 
@@ -301,6 +302,7 @@ module cv32e40p_id_stage
   logic        jr_stall;
   logic        load_stall;
   logic        csr_apu_stall;
+  logic        csr_lsu_stall;
   logic        hwlp_mask;
   logic        halt_id;
   logic        halt_if;
@@ -923,6 +925,10 @@ module cv32e40p_id_stage
   assign apu_perf_dep_o = apu_stall;
   // stall when we access the CSR after a multicycle APU instruction
   assign csr_apu_stall  = (csr_access & (apu_en_ex_o & (apu_lat_ex_o[1] == 1'b1) | apu_busy_i));
+  // Hold CSR instructions in ID until no older load/store can still fault.
+  // CSR writes are not otherwise gated by WB completion, so a CSR instruction
+  // in EX behind a faulting load/store would modify architectural state.
+  assign csr_lsu_stall  = csr_access & lsu_busy_i;
 
   /////////////////////////////////////////////////////////
   //  ____  _____ ____ ___ ____ _____ _____ ____  ____   //
@@ -1497,7 +1503,8 @@ module cv32e40p_id_stage
 
       branch_in_ex_o         <= 1'b0;
 
-    end else if (data_misaligned_i) begin
+    end else begin
+     if (data_misaligned_i) begin
       // misaligned data access case
       if (ex_ready_i) begin  // misaligned access case, only unstall alu operands
 
@@ -1636,8 +1643,23 @@ module cv32e40p_id_stage
         //Not doing it can overwrite the RF file with the currennt CSR value rather than the old one
         regfile_alu_we_ex_o <= 1'b0;
       end
+     end
 
-      if (data_req_flush) data_req_ex_o <= '0;
+     // Bus error on the load/store in WB: kill whatever is in EX. It is younger
+     // than the faulting access, so it must neither issue a bus request nor
+     // write the register file / CSRs. Done outside the if/else chain above so
+     // it also applies in the misaligned and multicycle-mult cases. Functional
+     // units in flight (e.g. a divide) are left to drain; only their
+     // architectural write enables are cleared.
+     if (data_req_flush) begin
+       data_req_ex_o        <= 1'b0;
+       data_misaligned_ex_o <= 1'b0;
+       data_load_event_ex_o <= 1'b0;
+       regfile_we_ex_o      <= 1'b0;
+       regfile_alu_we_ex_o  <= 1'b0;
+       csr_op_ex_o          <= CSR_OP_READ;
+       branch_in_ex_o       <= 1'b0;
+     end
     end
   end
 
@@ -1686,7 +1708,7 @@ module cv32e40p_id_stage
   end
 
   // stall control
-  assign id_ready_o = ((~misaligned_stall) & (~jr_stall) & (~load_stall) & (~apu_stall) & (~csr_apu_stall) & ex_ready_i);
+  assign id_ready_o = ((~misaligned_stall) & (~jr_stall) & (~load_stall) & (~apu_stall) & (~csr_apu_stall) & (~csr_lsu_stall) & ex_ready_i);
   assign id_valid_o = (~halt_id) & id_ready_o;
   assign halt_if_o = halt_if;
 

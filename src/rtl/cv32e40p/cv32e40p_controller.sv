@@ -435,22 +435,9 @@ module cv32e40p_controller import cv32e40p_pkg::*;
       DECODE:
       begin
 
-          if (branch_taken_ex_i)
-          begin //taken branch
-            // there is a branch in the EX stage that is taken
-
-            is_decoding_o = 1'b0;
-
-            pc_mux_o      = PC_BRANCH;
-            pc_set_o      = 1'b1;
-
-            // if we want to debug, flush the pipeline
-            // the current_pc_if will take the value of the next instruction to
-            // be executed (NPC)
-
-          end  //taken branch
-
-          else if (data_err_i)
+          // A bus error response for the load/store in WB has priority over a
+          // taken branch in EX: the branch is younger and must not redirect.
+          if (data_err_i)
           begin //data error
             // the current LW or SW received a bus error response
 
@@ -467,6 +454,21 @@ module cv32e40p_controller import cv32e40p_pkg::*;
             ctrl_fsm_ns       = FLUSH_WB;
 
           end  //data error
+
+          else if (branch_taken_ex_i)
+          begin //taken branch
+            // there is a branch in the EX stage that is taken
+
+            is_decoding_o = 1'b0;
+
+            pc_mux_o      = PC_BRANCH;
+            pc_set_o      = 1'b1;
+
+            // if we want to debug, flush the pipeline
+            // the current_pc_if will take the value of the next instruction to
+            // be executed (NPC)
+
+          end  //taken branch
 
           else if (is_fetch_failed_i)
           begin
