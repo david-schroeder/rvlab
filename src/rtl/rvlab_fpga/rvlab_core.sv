@@ -90,27 +90,24 @@ module rvlab_core (
   // Processor core
   // --------------
 
-  logic debug_req;
+  logic debug_req; // unconnected for now
 
-  rvlab_cpu #(
-    .PIPELINE_I_O('1),
-    .PIPELINE_I_I('0),
-    .PIPELINE_D_O('0),
-    .PIPELINE_D_I('0),
-
-    .RANDOMIZE_I ('0),
-    .RANDOMIZE_D ('0)
-  ) cpu_i (
+  turvo32_top cpu_i (
     .clk_i,
     .rst_ni,
-    .irq_external_i(irq_external),
-    .irq_timer_i   (irq_timer),
-    .tl_i_i        (tl_cpui_d2h),
-    .tl_i_o        (tl_cpui_h2d),
-    .tl_d_i        (tl_cpud_d2h),
-    .tl_d_o        (tl_cpud_h2d),
 
-    .debug_req_i(debug_req)
+    .interrupts_i({
+      20'h0,        // ints[31:12]
+      irq_external, // ints[11]
+      3'h0,         // ints[10:8]
+      irq_timer,    // ints[7]
+      7'h0          // ints[6:0]
+    }),
+
+    .ibus_i       (tl_cpui_d2h),
+    .ibus_o       (tl_cpui_h2d),
+    .dbus_i       (tl_cpud_d2h),
+    .dbus_o       (tl_cpud_h2d)
   );
 
   // Main block RAM

@@ -660,43 +660,77 @@ add wave -noupdate /system_tb/board/DUT/sys_clk
 add wave -noupdate /system_tb/board/DUT/dbg_rst_n
 add wave -noupdate /system_tb/board/DUT/sys_rst_n
 add wave -noupdate -divider CPU
-add wave -noupdate -group {CPU Registers} -label {ra (x1)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[1]}
-add wave -noupdate -group {CPU Registers} -label {sp (x2)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[2]}
-add wave -noupdate -group {CPU Registers} -label {gp (x3)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[3]}
-add wave -noupdate -group {CPU Registers} -label {tp (x4)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[4]}
-add wave -noupdate -group {CPU Registers} -label {t0 (x5)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[5]}
-add wave -noupdate -group {CPU Registers} -label {t1 (x6)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[6]}
-add wave -noupdate -group {CPU Registers} -label {t2 (x7)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[7]}
-add wave -noupdate -group {CPU Registers} -label {s0 (x8)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[8]}
-add wave -noupdate -group {CPU Registers} -label {s1 (x9)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[9]}
-add wave -noupdate -group {CPU Registers} -label {a0 (x10)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[10]}
-add wave -noupdate -group {CPU Registers} -label {a1 (x11)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[11]}
-add wave -noupdate -group {CPU Registers} -label {a2 (x12)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[12]}
-add wave -noupdate -group {CPU Registers} -label {a3 (x13)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[13]}
-add wave -noupdate -group {CPU Registers} -label {a4 (x14)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[14]}
-add wave -noupdate -group {CPU Registers} -label {a5 (x15)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[15]}
-add wave -noupdate -group {CPU Registers} -label {a6 (x16)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[16]}
-add wave -noupdate -group {CPU Registers} -label {a7 (x17)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[17]}
-add wave -noupdate -group {CPU Registers} -label {s2 (x18)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[18]}
-add wave -noupdate -group {CPU Registers} -label {s3 (x19)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[19]}
-add wave -noupdate -group {CPU Registers} -label {s4 (x20)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[20]}
-add wave -noupdate -group {CPU Registers} -label {s5 (x21)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[21]}
-add wave -noupdate -group {CPU Registers} -label {s6 (x22)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[22]}
-add wave -noupdate -group {CPU Registers} -label {s7 (x23)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[23]}
-add wave -noupdate -group {CPU Registers} -label {s8 (x24)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[24]}
-add wave -noupdate -group {CPU Registers} -label {s9 (x25)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[25]}
-add wave -noupdate -group {CPU Registers} -label {s10 (x26)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[26]}
-add wave -noupdate -group {CPU Registers} -label {s11 (x27)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[27]}
-add wave -noupdate -group {CPU Registers} -label {t3 (x28)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[28]}
-add wave -noupdate -group {CPU Registers} -label {t4 (x29)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[29]}
-add wave -noupdate -group {CPU Registers} -label {t5 (x30)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[30]}
-add wave -noupdate -group {CPU Registers} -label {t6 (x31)} {/system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/register_file_i/mem[31]}
-add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/pc_id_i
-add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/u_core_default/core_i/id_stage_i/instr_rdata_i
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[31]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[30]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[29]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[28]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[27]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[26]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[25]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[24]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[23]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[22]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[21]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[20]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[19]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[18]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[17]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[16]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[15]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[14]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[13]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[12]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[11]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[10]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[9]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[8]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[7]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[6]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[5]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[4]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[3]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[2]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[1]}
+add wave -noupdate -expand -group {CPU Registers} {/system_tb/board/DUT/core_i/cpu_i/id_stage_i/regfile_i/mem[0]}
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/ibus_h2d
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/ibus_d2h
+add wave -noupdate -expand /system_tb/board/DUT/core_i/cpu_i/dbus_h2d
+add wave -noupdate -expand /system_tb/board/DUT/core_i/cpu_i/dbus_d2h
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/mem_stage_i/pc_mem
+add wave -noupdate -radix riscv_instr /system_tb/board/DUT/core_i/cpu_i/mem_stage_i/instr_mem
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/mem_stage_valid
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/mem_stage_i/priv_i/csrfile_i/mstatus_q
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/mem_stage_i/priv_i/csrfile_i/mepc_q
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/mem_stage_i/priv_i/csrfile_i/mcause_q
+add wave -noupdate -divider {literally the entire writeback stage}
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/clk_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/commit_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/dbus_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/ex_mul_res_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/ex_result_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/ex_result_wb
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/fw_data_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/fw_rd_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/fw_valid_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/lsu_rdata_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/lsu_stall_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/ps_valid_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/rd_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/rd_wb
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/reg_rd_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/reg_wdata_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/reg_we_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/reg_we_o
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/reg_we_wb
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/rst_ni
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/valid_wb
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/wb_data
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/wb_src_i
+add wave -noupdate /system_tb/board/DUT/core_i/cpu_i/wb_stage_i/wb_src_wb
 add wave -noupdate -divider TL-UL
 add wave -noupdate /system_tb/board/DUT/core_i/tl_cpui_h2d
 add wave -noupdate /system_tb/board/DUT/core_i/tl_cpui_d2h
-add wave -noupdate /system_tb/board/DUT/core_i/tl_cpud_h2d
+add wave -noupdate -expand /system_tb/board/DUT/core_i/tl_cpud_h2d
 add wave -noupdate /system_tb/board/DUT/core_i/tl_cpud_d2h
 add wave -noupdate /system_tb/board/DUT/core_i/tl_bram_main_h2d
 add wave -noupdate /system_tb/board/DUT/core_i/tl_bram_main_d2h
@@ -712,9 +746,9 @@ add wave -noupdate /system_tb/board/DUT/core_i/student_i/rlight_i/re
 add wave -noupdate /system_tb/board/DUT/core_i/student_i/rlight_i/wdata
 add wave -noupdate /system_tb/board/DUT/core_i/student_i/rlight_i/we
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {40160000000 fs} 0}
+WaveRestoreCursors {{Cursor 1} {16434769734 fs} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 732
+configure wave -namecolwidth 364
 configure wave -valuecolwidth 288
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
@@ -728,4 +762,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 fs} {227074683962 fs}
+WaveRestoreZoom {16408484481 fs} {16495225817 fs}

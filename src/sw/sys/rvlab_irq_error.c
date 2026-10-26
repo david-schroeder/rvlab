@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <rvlab.h>
 
-// Exception Causes [adapted from src/rtl/cv32e40p/pkg/cv32e40p_pkg.sv]
+// Exception Causes
 #define EXC_CAUSE_INSTR_FAULT 0x01
 #define EXC_CAUSE_ILLEGAL_INSN 0x02
 #define EXC_CAUSE_BREAKPOINT 0x03
